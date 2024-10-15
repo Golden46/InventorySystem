@@ -24,16 +24,14 @@ public class ItemInteract : Interactable
     {
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
 
-        if (playerInventory != null)
-        {
-            bool wasPickedUp = playerInventory.PickupItem(item);
+        if (playerInventory == null) return;
+        bool wasPickedUp = playerInventory.PickupItem(item);
 
-            if (wasPickedUp)
-            {
-                Debug.Log($"Picked up {item.itemName}");
-                Destroy(gameObject);  // Remove the item from the world
-            }
-            else Debug.Log("Inventory is full!");
+        if (wasPickedUp)
+        {
+            Debug.Log($"Picked up {item.itemName}");
+            Destroy(gameObject);  // Remove the item from the world
         }
+        else Debug.Log("Inventory is full!");
     }
 }
