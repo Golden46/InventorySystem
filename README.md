@@ -34,3 +34,8 @@ I already had interactions from a script I already created so I had no issues wi
 - I did have to make an ItemInteract script which is placed on each item you can pick up. This was very easy to do and had no issues. 
 - Upon setting up the interactions I did forget to create an Interactable layer for the objects to have so at first the interactions didn't work.
 - I had a lot of trouble setting up the new input system for the interact key to subscribe to the performed event action. I was subscribing to a function in the first person controller script and I am using a seperate script for the input manager. I was referencing the first person controller script wrong so it was coming back as null. I changed this to use FindObjectOfType because there will be only one FPS and now it works perfectly.
+
+
+## 2024-10-17
+- Using the new input system, set up a way to toggle the inventory UI with no issues
+  - Had to add a way to disable camera movement and interaction when in the inventory otherwise you could pick up items and look around while trying to navigate the inventory which I do not want.
