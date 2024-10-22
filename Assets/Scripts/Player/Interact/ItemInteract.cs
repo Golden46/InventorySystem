@@ -26,7 +26,7 @@ public class ItemInteract : Interactable
         if (playerInventory.PickupItem(item))
         {
             Debug.Log($"Picked up {item.itemName}");
-            Destroy(gameObject);  // Remove the item from the world
+            Destroy(gameObject);
         }
         else Debug.Log("Inventory is full!");
     }
