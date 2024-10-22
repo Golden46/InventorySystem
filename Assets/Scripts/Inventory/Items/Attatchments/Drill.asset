@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   itemName: Bill Drill
-  itemIcon: {fileID: 21300000, guid: 25b65f84d11ecf942abcae8bbc6af96a, type: 3}
+  itemIcon: {fileID: 21300000, guid: 0329f15c1935ea2429e8e8230b4d6b16, type: 3}
   isStackable: 0
   maxStackSize: 1
   miningPower: 3
