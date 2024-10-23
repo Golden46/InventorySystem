@@ -16,23 +16,18 @@ public class PlayerInventory : MonoBehaviour
 
     public void ToggleInventory(InputAction.CallbackContext context)
     {
-        if (inventoryUI.gameObject.activeInHierarchy)
-        {
-            inventoryUI.gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            _fpc.canLook = true;
-            _fpc.canInteract = true;
-        }
-        else
-        {
-            _fpc.canLook = false;
-            _fpc.canInteract = false;
-            inventoryUI.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true; 
-        }
-            
+        bool isInventoryOpen = !inventoryUI.gameObject.activeInHierarchy;
+        inventoryUI.gameObject.SetActive(isInventoryOpen);
+        SetCursorState(isInventoryOpen);
+    
+        _fpc.canLook = !isInventoryOpen;
+        _fpc.canInteract = !isInventoryOpen;
+    }
+
+    private void SetCursorState(bool isInventoryOpen)
+    {
+        Cursor.visible = isInventoryOpen;
+        Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     public bool PickupItem(InventoryItem item)

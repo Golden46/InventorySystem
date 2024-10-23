@@ -28,7 +28,6 @@ public class InventorySlot : MonoBehaviour
         statPanel.SetActive(true);
         statPanel.transform.SetParent(transform.parent);
         statPanel.transform.SetAsLastSibling();
-        Debug.Log(_currentItem.stats);
     }
 
     public void OnPointerExit()
