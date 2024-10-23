@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -16,6 +17,10 @@ public class InventorySlot : MonoBehaviour
         _currentItem = item;
         icon.sprite = item.itemIcon;
         itemName.text = item.name;
+
+        string itemStats = "";
+        foreach (KeyValuePair<string, int> kvp in _currentItem.ItemStats()) itemStats += $"{kvp.Key}: {kvp.Value}\n";
+        stats.text = itemStats;
     }
 
     public void OnSlotClick()

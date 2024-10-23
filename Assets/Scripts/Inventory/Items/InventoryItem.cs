@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class InventoryItem : ScriptableObject
+public abstract class InventoryItem : ScriptableObject
 {
     [Header("Item Info")]
     public int id; 
@@ -10,4 +11,6 @@ public class InventoryItem : ScriptableObject
     [Header("Stack Information")]
     public bool isStackable; 
     public int maxStackSize;
+
+    public abstract Dictionary<string, int> ItemStats();
 }

@@ -10,11 +10,9 @@ public class Sword : InventoryItem
     [Range(1,5)] public int guardAbility;
     [Range(1,500)] public int durability;
 
-    [HideInInspector] public Dictionary<string, int> stats;
-
-    public Sword(Dictionary<string, int> stats)
+    public override Dictionary<string, int> ItemStats()
     {
-        stats = new Dictionary<string, int>
+        return new Dictionary<string, int>
         {
             { "Sharpness", sharpness },
             { "Attack Speed", attackSpeed },
