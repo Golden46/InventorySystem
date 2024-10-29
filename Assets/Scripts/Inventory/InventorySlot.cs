@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     private InventoryItem _currentItem;
+    private bool _isHovering;
 
     [SerializeField] private GameObject statPanel;
     [SerializeField] private TextMeshProUGUI itemName;
@@ -23,9 +25,16 @@ public class InventorySlot : MonoBehaviour
         stats.text = itemStats;
     }
 
-    public void OnSlotClick()
+    public void OnDrag()
     {
-        Debug.Log($"Clicked on {_currentItem.itemName}");
+        OnPointerExit();
+        icon.color = Color.clear;
+    }
+
+    public void OnDragEnd()
+    {
+        OnPointerEnter();
+        icon.color = Color.white;
     }
 
     public void OnPointerEnter()
