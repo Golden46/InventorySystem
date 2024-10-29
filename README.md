@@ -39,3 +39,9 @@ I already had interactions from a script I already created so I had no issues wi
 ## 2024-10-17
 - Using the new input system, set up a way to toggle the inventory UI with no issues
   - Had to add a way to disable camera movement and interaction when in the inventory otherwise you could pick up items and look around while trying to navigate the inventory which I do not want.
+
+
+## 2024-20-21
+- I wanted to create a way to view the stats of each item in the players inventory.
+  - My first issue was reading the stats from the item. They way I have the system setup meant I had to change a few things. The inventory is a list of InventoryItems but each item type e.g. "Sword", "Axe" etc... is its own class which derives from the InventoryItem class. The way I got around this was by making the InventoryItem class abstract and making a function I called ItemStats which returns a Dictionary<string, int>, where string is the name of the stat and int is the stat value. Then in each class for the items I override this function and return a dictionary with all the stat names and values. In the inventoryslot script I can call this function on each item and display the stats modularly now.
+  - I also had an issue with the Z-index of the UI Panel that the stats appear on. In unity you can't change the Z-index of UI componenets so the way I overcame this was by .........
