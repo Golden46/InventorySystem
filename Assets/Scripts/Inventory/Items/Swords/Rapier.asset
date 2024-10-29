@@ -17,6 +17,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 8360f2fd183081743abae652dcaec9d0, type: 3}
   isStackable: 0
   maxStackSize: 1
+  prefab: {fileID: 1131215700008175903, guid: ff3e90a6339400b459397a71d64e1dc8, type: 3}
   sharpness: 5
   attackSpeed: 10
   guardAbility: 3

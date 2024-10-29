@@ -12,5 +12,7 @@ public abstract class InventoryItem : ScriptableObject
     public bool isStackable; 
     public int maxStackSize;
 
+    public GameObject prefab;
+
     public abstract Dictionary<string, int> ItemStats();
 }
