@@ -14,16 +14,16 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI stats;
 
-    private Transform playerTransform;
-    private Transform originalParent;
-    private CanvasGroup canvasGroup;
-    private Canvas canvas;
+    private PlayerInventory _playerInventory;
+    private Transform _playerTransform;
+    private Transform _originalParent;
+    private CanvasGroup _canvasGroup;
 
     private void Awake()
     {
-        canvas = GetComponentInParent<Canvas>();
-        canvasGroup = icon.GetComponent<CanvasGroup>();
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        _playerInventory = FindObjectOfType<PlayerInventory>();
+        _canvasGroup = icon.GetComponent<CanvasGroup>();
+        _playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     public void SetItem(InventoryItem item)
@@ -46,9 +46,9 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         OnPointerExit(eventData);
 
-        originalParent = icon.transform.parent;
+        _originalParent = icon.transform.parent;
         icon.transform.SetParent(transform.root);
-        canvasGroup.blocksRaycasts = false;
+        _canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -58,13 +58,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        icon.transform.SetParent(originalParent);
+        icon.transform.SetParent(_originalParent);
         icon.transform.localPosition = Vector3.zero;
-        canvasGroup.blocksRaycasts = true;
+        _canvasGroup.blocksRaycasts = true;
 
         if (!RectTransformUtility.RectangleContainsScreenPoint((RectTransform)transform.parent, eventData.position))
         {
-            DropIteminWorld();
+            DropItemInWorld();
             Destroy(gameObject);
         }
     }
@@ -80,10 +80,10 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    private void DropIteminWorld()
+    private void DropItemInWorld()
     {
-        Vector3 dropPosition = playerTransform.position + playerTransform.right * 2;
-
+        Vector3 dropPosition = _playerTransform.position + _playerTransform.right * 2;
+        _playerInventory.DropItem(currentItem);
         Instantiate(currentItem.prefab, dropPosition, Quaternion.identity);
     }
 
@@ -99,5 +99,4 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         statPanel.SetActive(false);
         statPanel.transform.SetParent(transform);
     }
-  
 }

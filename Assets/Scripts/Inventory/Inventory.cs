@@ -8,18 +8,17 @@ public class Inventory
 
     public bool AddItem(InventoryItem item)
     {
-        if (Items.Count >= MaxSlots) return false; // Full inventory
+        if (Items.Count >= MaxSlots) return false;
         
-        // Add item
         Items.Add(item);
         return true;
     }
 
     public void RemoveItem(InventoryItem item)
     {
-        if (Items.Contains(item)) // If the item exists
+        if (Items.Contains(item)) 
         {
-            Items.Remove((item)); // Remove it
+            Items.Remove((item));
         }
     }
 }

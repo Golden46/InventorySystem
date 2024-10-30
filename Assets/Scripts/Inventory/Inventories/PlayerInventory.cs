@@ -3,14 +3,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public Inventory PInventory;
+    private Inventory _pInventory;
     public InventoryUI inventoryUI;
 
     private FirstPersonController _fpc;
 
     private void Start()
     {
-        PInventory = new Inventory(); 
+        _pInventory = new Inventory(); 
         _fpc = FindObjectOfType<FirstPersonController>();
     }
 
@@ -32,15 +32,19 @@ public class PlayerInventory : MonoBehaviour
 
     public bool PickupItem(InventoryItem item)
     {
-        bool added = PInventory.AddItem(item);
-        inventoryUI.UpdateInventory(PInventory);
+        bool added = _pInventory.AddItem(item);
+        inventoryUI.UpdateInventory(_pInventory);
         return added;
     }
 
     public void DropItem(InventoryItem item)
     {
-        PInventory.RemoveItem(item); 
-        inventoryUI.UpdateInventory(PInventory);
-        // Drop item in world v
+        _pInventory.RemoveItem(item); 
+        inventoryUI.UpdateInventory(_pInventory);
+    }
+
+    public void SwapItem(InventoryItem item)
+    {
+        
     }
 }
