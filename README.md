@@ -41,7 +41,17 @@ I already had interactions from a script I already created so I had no issues wi
   - Had to add a way to disable camera movement and interaction when in the inventory otherwise you could pick up items and look around while trying to navigate the inventory which I do not want.
 
 
-## 2024-20-21
+## 2024-10-21
+
+### Stat panel.
 - I wanted to create a way to view the stats of each item in the players inventory.
   - My first issue was reading the stats from the item. They way I have the system setup meant I had to change a few things. The inventory is a list of InventoryItems but each item type e.g. "Sword", "Axe" etc... is its own class which derives from the InventoryItem class. The way I got around this was by making the InventoryItem class abstract and making a function I called ItemStats which returns a Dictionary<string, int>, where string is the name of the stat and int is the stat value. Then in each class for the items I override this function and return a dictionary with all the stat names and values. In the inventoryslot script I can call this function on each item and display the stats modularly now.
-  - I also had an issue with the Z-index of the UI Panel that the stats appear on. In unity you can't change the Z-index of UI componenets so the way I overcame this was by .........
+  - I also had an issue with the Z-index of the UI Panel that the stats appear on. In unity you can't change the Z-index of UI componenets. The way I managed to resolve this was by changing the parent of the statPanel from the slot to the slots parent and setting it as the last sibling meaning it will always appear on top. Then when the mouse stops hovering over the slot it becomes the child of the slot again and hides.
+
+ 
+## 2024-10-29
+
+### Swapping items in the inventory
+- First, I wanted to just get dragging working and figure out the swapping after. To drag the icon I wanted to make it so you the slot stays in place but the icon gets dragged. I thought of two ways to do this. The first way is to hide the icon on the slot and duplicate it to follow the mouse. The way I did it was to make the icon a child of the slot and use that to follow the mouse.
+  - I coded it so this would work perfectly, however, I forgot to actuall extract the icon from the button and make it a child on the prefab so I kept getting really weird bugs when dragging. For some reaason it took me ages to figure out why it wasn't working but when I did and I made the icon a child it worked perfectly.
+- Then, I did the coding for swapping the icons, this was very easy as I already had the code in place from when I initialise the slot. I just had to call it again on the from and to slot but just with the copied data. I created this functuion in the inventoryUI script and it looked as though it was working flawlessly.
