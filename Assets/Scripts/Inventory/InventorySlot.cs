@@ -77,6 +77,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             InventoryUI inventoryUI = GetComponentInParent<InventoryUI>();
             inventoryUI.SwapItems(draggedSlot, this);
+            _playerInventory.SwapItems(draggedSlot.currentItem, this.currentItem);
         }
     }
 

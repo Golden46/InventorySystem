@@ -43,8 +43,8 @@ public class PlayerInventory : MonoBehaviour
         inventoryUI.UpdateInventory(_pInventory);
     }
 
-    public void SwapItem(InventoryItem item)
+    public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
     {
-        
+        _pInventory.SwapItems(fromItem, toItem);
     }
 }
