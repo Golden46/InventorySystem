@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e161c8340c7424fad4a0a5be212a95, type: 3}
+  m_Name: Scimitar
+  m_EditorClassIdentifier: 
+  id: 122
+  itemName: Scimitar
+  itemIcon: {fileID: 21300000, guid: ab0a9f4ed70d03b4ab5186611251583a, type: 3}
+  isStackable: 0
+  maxStackSize: 1
+  prefab: {fileID: 2358828092286496348, guid: aa423e54ad302974e8d84e328a826b02, type: 3}
+  sharpness: 4
+  attackSpeed: 4
+  guardAbility: 4
+  durability: 400

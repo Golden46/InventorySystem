@@ -6,17 +6,14 @@ public class ItemInteract : Interactable
     
     public override void OnFocus()
     {
-        Debug.Log("Focus");
     }
 
     public override void OnLoseFocus()
     {
-        Debug.Log("Lose Focus");
     }
 
     public override void OnInteract()
     {
-        Debug.Log("Interact");
         PickUp();
     }
 
@@ -25,12 +22,11 @@ public class ItemInteract : Interactable
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
 
         if (playerInventory == null) return;
-        bool wasPickedUp = playerInventory.PickupItem(item);
 
-        if (wasPickedUp)
+        if (playerInventory.PickupItem(item))
         {
             Debug.Log($"Picked up {item.itemName}");
-            Destroy(gameObject);  // Remove the item from the world
+            Destroy(gameObject);
         }
         else Debug.Log("Inventory is full!");
     }

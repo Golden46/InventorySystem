@@ -7,6 +7,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Functional Options")]
     public bool canInteract = true;
+    public bool canLook = true;
 
     [Header("Controls")]
     private PlayerInputActions _playerInputActions;
@@ -41,8 +42,6 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 _moveDirection;
     private Vector2 _currentInput;
 
-    public static FirstPersonController Instance;
-
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;  // Lock the cursor to the screen
@@ -51,10 +50,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
-        // Make sure only one of this script is active in the scene at a time 
-        if (Instance !=  null && Instance != this) Destroy(this);
-        else Instance = this;
-        
         _playerCamera = Camera.main;  // Set player camera variable to the camera
         _characterController = GetComponent<CharacterController>();  // Set character controller variable to the character controller
     }
@@ -67,12 +62,9 @@ public class FirstPersonController : MonoBehaviour
     private void Update()
     {
         HandleMovement();
-        HandleMouseLook();
+        if(canLook) HandleMouseLook();
 
-        if(canInteract)
-        {
-            HandleInteractionCheck();
-        }
+        if(canInteract) HandleInteractionCheck();
 
         // Call function to apply the movements made in that frame
         ApplyFinalMovements();
@@ -87,7 +79,6 @@ public class FirstPersonController : MonoBehaviour
 
         var moveDirectionY = _moveDirection.y;  // Create a float variable of the move direction of the users y coordinates
 
-        //_moveDirection = (transform.TransformDirection(_playerCamera.transform.forward) * _currentInput.x) + (transform.TransformDirection(_playerCamera.transform.right) * _currentInput.y);
         _moveDirection = transform.right * _currentInput.x + -transform.forward * _currentInput.y;
         _moveDirection.y = moveDirectionY;
     }
@@ -141,7 +132,7 @@ public class FirstPersonController : MonoBehaviour
 
     public void HandleInteractionInput(InputAction.CallbackContext context)
     {
-        if(_currentInteractable && Physics.Raycast(_playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance, interactionLayer))
+        if(canInteract && _currentInteractable && Physics.Raycast(_playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance, interactionLayer))
         {
             _currentInteractable.OnInteract();
         }
