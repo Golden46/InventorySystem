@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 957c298be4bbf3547a0d4ac761af9887, type: 3}
-  m_Name: GoldenEgg
+  m_Name: Bronze
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: 
-  itemIcon: {fileID: 0}
-  isStackable: 0
-  maxStackSize: 0
-  chickenType: 
-  hatchRate: 0
+  id: 1
+  itemName: Bronze
+  itemIcon: {fileID: 21300000, guid: ed941f25ec33f804e8bd4c66b4b8e2e6, type: 3}
+  isStackable: 1
+  maxStackSize: 64
+  prefab: {fileID: 1650821029307806546, guid: 666ef8ded002a48458f7b5f2000bd6d3, type: 3}
+  furnacePower: 2
+  smeltTime: 90

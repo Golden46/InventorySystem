@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+    
 public class Inventory
 {
     public InventoryUI InventoryUI;
@@ -9,7 +9,6 @@ public class Inventory
     public bool AddItem(InventoryItem item)
     {
         if (Items.Count >= MaxSlots) return false;
-        
         Items.Add(item);
         return true;
     }
