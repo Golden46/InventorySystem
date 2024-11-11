@@ -15,6 +15,9 @@ Additionally, you will need basic understanding of a few intermediate programmin
 
 ## Objectives
 
+## Before starting the tutorial.
+Please note that before   
+
 ## Setting up the scene
 First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder
 pipeline but it can be created the same using the Built-In Render Pipeline too.
@@ -42,4 +45,5 @@ public abstract class InventoryItem : ScriptableObject
     public abstract Dictionary<string, int> ItemStats();
 }
 ```
-f
+> [!NOTE]
+> This class is a Scriptable Object and you should have previous knowledge of this before attempting this tutorial. 
