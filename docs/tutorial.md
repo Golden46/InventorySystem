@@ -75,9 +75,13 @@ public abstract class InventoryItem : ScriptableObject
 Now that we have our base class, we can start to make some item classes we want in our game. Here is an example of an item class for
 a sword. It has a sharpness, attack speed, guard ability, and durability stat.
 
->[!NOTE]
+>[!IMPORTANT]
 > This item is also a Scriptable Object and will be created as an asset. It is important to realise that it inherits from InventoryItem because we want
 > to have those properties on our sword as well as the ones that are unique to just this item.
+
+>[!NOTE]
+> The ItemStats function at the bottom is the exact same as the one in the InventoryItem script however it uses the override modifier. This is because
+> ubvgvgb 
 
 ```cs
 using UnityEngine;
