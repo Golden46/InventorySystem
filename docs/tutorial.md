@@ -15,20 +15,17 @@ Additionally, you will need basic understanding of a few intermediate programmin
 
 ## Objectives
 
-## Before starting the tutorial.
-Please note that before   
+## Quick Links
+- [Items](#items)
+-
+-
+-
 
 ## Setting up the scene
 First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder
 pipeline but it can be created the same using the Built-In Render Pipeline too.
 
 ## Items
-
-<details>
-<summary><a href="InventoryItem.md">Inventory Item</a></summary>
-This is a dropdown with text!
-</details>
-
 ### [Inventory Item](InventoryItem.md)
 To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed
 for a functional inventory.
