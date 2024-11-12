@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Item", menuName = "InventoryItem/Sword")]
+[CreateAssetMenu(fileName = "Sword Item", menuName = "InventoryItem/Sword")]
 public class Sword : InventoryItem
 {
     [Header("Unique Item Info")]

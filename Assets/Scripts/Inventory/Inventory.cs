@@ -2,7 +2,6 @@ using System.Collections.Generic;
     
 public class Inventory
 {
-    public InventoryUI InventoryUI;
     public List<InventoryItem> Items = new List<InventoryItem>();
     public int MaxSlots = 24; 
 
