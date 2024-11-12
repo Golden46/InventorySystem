@@ -22,8 +22,24 @@ Please note that before
 First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder
 pipeline but it can be created the same using the Built-In Render Pipeline too.
 
-## [Inventory Item](InventoryItem.md)
-To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information.
+## Items
+
+<details>
+<summary><a href="InventoryItem.md">Inventory Item</a></summary>
+This is a dropdown with text!
+</details>
+
+### [Inventory Item](InventoryItem.md)
+To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed
+for a functional inventory.
+
+> [!IMPORTANT]
+> This class is abstract and a Scriptable Object; You should have previous knowledge of what this is before attempting this tutorial.
+
+> [!NOTE]
+> This Scriptable Object will never be created as an asset we can use. All of our item types will have seperate objects that all inherit from this class.
+> The abstract function at the bottom of the script will be used later on in order to get the item stats from each seperate item so it can be displayed
+> in our inventory.
 
 ```cs
 using UnityEngine;
@@ -45,5 +61,32 @@ public abstract class InventoryItem : ScriptableObject
     public abstract Dictionary<string, int> ItemStats();
 }
 ```
-> [!NOTE]
-> This class is a Scriptable Object and you should have previous knowledge of this before attempting this tutorial. 
+
+### [Sword](Sword.md)
+Now that we have our base class, we can start to make some item classes we want in our game.
+
+```cs
+using UnityEngine;
+using System.Collections.Generic;
+
+[CreateAssetMenu(fileName = "Item", menuName = "InventoryItem/Sword")]
+public class Sword : InventoryItem
+{
+    [Header("Unique Item Info")]
+    [Range(1,5)] public int sharpness;
+    [Range(1,10)] public int attackSpeed;
+    [Range(1,5)] public int guardAbility;
+    [Range(1,500)] public int durability;
+
+    public override Dictionary<string, int> ItemStats()
+    {
+        return new Dictionary<string, int>
+        {
+            { "Sharpness", sharpness },
+            { "Attack Speed", attackSpeed },
+            { "Guard Ability", guardAbility },
+            { "Durability", durability }
+        };
+    }
+}
+```
