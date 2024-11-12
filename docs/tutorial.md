@@ -17,6 +17,9 @@ Additionally, you will need basic understanding of a few intermediate programmin
 
 ## Quick Links
 - [Items](#items)
+  - [Inventory Item](#inventoryitem)
+  - [Sword](#sword)
+  -
 -
 -
 -
