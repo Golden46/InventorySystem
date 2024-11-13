@@ -80,8 +80,10 @@ a sword. It has a sharpness, attack speed, guard ability, and durability stat.
 > to have those properties on our sword as well as the ones that are unique to just this item.
 
 >[!NOTE]
-> The ItemStats function at the bottom is the exact same as the one in the InventoryItem script however it uses the override modifier. This is because
-> ubvgvgb 
+> The ItemStats function at the bottom is called the exact same as the one in the InventoryItem script. This is really important
+> because it needs to override the function in the base class in order to work properly. We need a way to get the items stats and
+> display them on the screen, and using this method to return them in the form of a dictionary works really well when you need to
+> proceduraly show different types of stats.
 
 ```cs
 using UnityEngine;
