@@ -6,7 +6,7 @@
 - [Prerequisites](#prerequisites)
 - [Objectives](#objectives)
 - [Setting up the scene](#setting-up-the-scene)
-- [Items](#items)
+- [Scripting - Items](#scripting---items)
   - [Inventory Item](#inventory-item)
   - [Sword](#sword)
   - [Ore](#ore)
