@@ -35,7 +35,7 @@ pipeline but it can be created the same using the Built-In Render Pipeline too.
 
 
 ## Scripting - Items
-In this section, we are going to be creating a way for us to store our item data which can then be used in the inventory. 
+> In this section, we are going to be creating a way for us to store our item data which can then be used in the inventory. 
 
 ### [Inventory Item](InventoryItem.md)
 To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed
@@ -74,6 +74,7 @@ public abstract class InventoryItem : ScriptableObject
 > So you can easily view the data in the inspector, you should add headers to your properties. In this script I have added a header for the item info and
 > stack info to help organise it.
 
+***
 
 ### [Sword](Sword.md)
 Now that we have our base class, we can start to make some item classes we want in our game. Here is an example of an item class for
@@ -121,6 +122,7 @@ public class Sword : InventoryItem
 >[!TIP]
 > Infront of each of the unique item properties, I have added a Range attribute. This is so I can limit, in the inspector, what values each property can go up to. This is good for being able to limit the values on each property so you dont accidently make an error when setting up an item.
 
+***
 
 ### [Ore](Ore.md)
 This is an example of another item type we could have in our game. You can make any items you want, you don't have to follow these exactly.
