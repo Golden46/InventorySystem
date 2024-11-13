@@ -34,7 +34,7 @@ First, you will need to create a Unity 3D project. This was created using the Un
 pipeline but it can be created the same using the Built-In Render Pipeline too.
 
 
-## Items
+## Scripting - Items
 In this section, we are going to be creating a way for us to store our item data which can then be used in the inventory. 
 
 ### [Inventory Item](InventoryItem.md)
