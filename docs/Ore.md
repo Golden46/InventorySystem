@@ -4,8 +4,8 @@
 ### Public Properties
 |name|description|
 |----|-----------|
-|sharpness|Damage modifier for the sword (base damage)|
-|attackSpeed|How fast the sword can attack|
+|furnacePower|Type of furnave required to smelt the ore|
+|smeltTime|How long the ore takes to smelt into metal|
 
 ### Abstract methods
 |name|description|
