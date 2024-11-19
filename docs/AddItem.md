@@ -12,14 +12,13 @@ Adds an item to the Item list.
 The below example creates a new ```Inventory``` ```instance``` for the player and adds an item to it. 
 ```cs
 private Inventory _playerInventory;
-public InventoryItem item;
 
 private void Start()
 {
   _playerInventory = new Inventory();
 }
 
-private void PickupItem()
+private void PickupItem(InventoryItem item)
 {
   if(_pInventory.AddItem(item)) Debug.Log("Item added to inventory")
   else Debug.Log("Inventory Full")
