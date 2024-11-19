@@ -9,7 +9,7 @@ Boolean ```false``` if inventory is full and ```true``` if the item gets added.
 ### Description
 Adds an item to the Item list.
 
-The below example creates a new inventory instance for the player and adds an item to it. 
+The below example creates a new ```Inventory``` ```instance``` for the player and adds an item to it. 
 ```cs
 private Inventory _playerInventory;
 public InventoryItem item;
