@@ -4,14 +4,19 @@
 public Dictionary<string, int> ItemStats();
 
 ### Returns
-Dictionary<string, int> where string is the name of a stat and int is the stat.
+```Dictionary<string, int>``` where string is the name of a stat and int is the stat.
 
 ### Description
 Grabs the stat info off of an item.
 
-The below example is loops through each stat from an item and displays it on a text component.
+The below example takes in an ```InvetoryItem``` and loops through its stats adding it to ```itemStats```. It then displays that on a ```TextMeshProUGUI``` to the user.
 ```cs
-itemStats = "";
-foreach (KeyValuePair<string, int> kvp in item.ItemStats()) itemStats += $"{kvp.Key}: {kvp.Value}\n";
-stats.text = itemStats;
+public string itemStats;
+[SerializeField] private TextMeshProUGUI stats;
+
+private void GetStats(InventoryItem item)
+{
+  foreach (KeyValuePair<string, int> kvp in item.ItemStats()) itemStats += $"{kvp.Key}: {kvp.Value}\n";
+  stats.text = itemStats;
+}
 ```
