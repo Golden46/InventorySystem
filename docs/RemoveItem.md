@@ -7,9 +7,9 @@ public void RemoveItem(InventoryItem item)
 ```None```
 
 ### Description
-Removes an item to the Item list.
+Removes an item from the Item list.
 
-The below example creates a new ```Inventory``` ```instance``` for the player and removes an item from it.
+The below example creates a new ```Inventory``` ```instance``` for the player and has a function to remove an item from it.
 ```cs
 private Inventory _playerInventory;
 
