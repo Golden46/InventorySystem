@@ -12,6 +12,7 @@
   - [Ore](#ore)
 - [Scripting - Inventory Functionality](#scripting---inventory-functionality)
   - [Inventory](#inventory)
+  - [PlayerInventory](#playerinventory)
 - [Scripting - User Interface](#scripting---user-interface)
 
 ## Prerequisites
@@ -171,8 +172,9 @@ public class Inventory
     public void RemoveItem(InventoryItem item){...}
 }
 ```
->[!NOTE]
-> The `AddItem` function first checks if the amount of Items in the list is more than or equal to the MaxSlots in the Inventory. If it is then it will return false and not add the item to the Item list. If it isn't then the item will be added to the list.
+<br>
+
+The `AddItem` function first checks if the amount of Items in the list is more than or equal to the MaxSlots in the Inventory. If it is then it will return false and not add the item to the Item list. If it isn't then the item will be added to the list.
 ```cs
 public bool AddItem(InventoryItem item)
 {
@@ -181,8 +183,9 @@ public bool AddItem(InventoryItem item)
   return true;
 }
 ```
->[!NOTE]
-> The `SwapItems` function first checks if the items being swapped are both in the Items list. If they are it will get the index of the first item and put it into a a placeholder variable for use later. It then gets the index of the second item and sets the first item to that index. Lastly it will place the second item into the index of the first item.
+<br>
+
+The `SwapItems` function first checks if the items being swapped are both in the Items list. If they are it will get the index of the first item and put it into a a placeholder variable for use later. It then gets the index of the second item and sets the first item to that index. Lastly it will place the second item into the index of the first item.
 
 >[!WARNING]
 > You need to have that placeholder variable. If you switch the first two items before getting both of the indexes then when you go to get the second items index it will have already changed and you will have no reference of where it came from.
@@ -197,8 +200,9 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
   }
 }
 ```
->[!NOTE]
-> The `RemoveItem` function first checks if the item being removed exists in the list and if it does it simply removes it.
+<br>
+
+The `RemoveItem` function first checks if the item being removed exists in the list and if it does it simply removes it.
 ```cs
 public void RemoveItem(InventoryItem item)
 {
@@ -244,8 +248,9 @@ public class PlayerInventory : MonoBehaviour
     public void SwapItems(InventoryItem fromItem, InventoryItem toItem){...}
 }
 ```
->[!NOTE]
-> The `ToggleInventory` function is used to open and close the player inventory. First it checks the state of the inventory; If it is open the `isInventoryOpen` bool will be false and vice versa. It then sets toggles the 'InventoryUI' 'GameObject' on or off. Next, the cursor state will be toggled using the next function. Lastly, the player will be unable to look around and interact when the inventory is open to prevent any unwanted functionality like accidently picking up an item while trying to drag an item in the inventory.
+<br>
+
+The `ToggleInventory` function is used to open and close the player inventory. First it checks the state of the inventory; If it is open the `isInventoryOpen` bool will be false and vice versa. It then sets toggles the 'InventoryUI' 'GameObject' on or off. Next, the cursor state will be toggled using the next function. Lastly, the player will be unable to look around and interact when the inventory is open to prevent any unwanted functionality like accidently picking up an item while trying to drag an item in the inventory.
 ```cs
 public void ToggleInventory(InputAction.CallbackContext context)
 {
@@ -257,8 +262,9 @@ public void ToggleInventory(InputAction.CallbackContext context)
   _fpc.canInteract = !isInventoryOpen;
 }
 ```
->[!NOTE]
-> The `SetCursorState` function toggles the `visiblity` and `lockState` of the cursor on the screen. If the inventory is open the cursor becomes `visible` and `unlocked` and if the inventory is closed it becomes `invisible` and `locked`.
+<br>
+
+The `SetCursorState` function toggles the `visiblity` and `lockState` of the cursor on the screen. If the inventory is open the cursor becomes `visible` and `unlocked` and if the inventory is closed it becomes `invisible` and `locked`.
 ```cs
 private void SetCursorState(bool isInventoryOpen)
 {
@@ -266,8 +272,9 @@ private void SetCursorState(bool isInventoryOpen)
   Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
 }
 ```
->[!NOTE]
-> The `PickupItem` function first attempts to add the `item` to the `Item` list and then updates the `UI` to display it. It then `returns true or false` depending on whether the item was added or not.
+<br>
+
+The `PickupItem` function first attempts to add the `item` to the `Item` list and then updates the `UI` to display it. It then `returns true or false` depending on whether the item was added or not.
 ```cs
 public bool PickupItem(InventoryItem item)
 {
@@ -276,8 +283,9 @@ public bool PickupItem(InventoryItem item)
   return added;
 }
 ```
->[!NOTE]
-> The `DropItem` function removes the `item` from the `Item` list if it exists and then updates the `UI` to represent that.
+<br>
+
+The `DropItem` function removes the `item` from the `Item` list if it exists and then updates the `UI` to represent that.
 ```cs
 public void DropItem(InventoryItem item)
 {
@@ -285,8 +293,9 @@ public void DropItem(InventoryItem item)
   inventoryUI.UpdateInventory(_pInventory);
 }
 ```
->[!NOTE]
-> The `SwapItems` function just swaps the `items` in the `Item` list. The visual `UI` changes are done in the `InventorySlot` script where this function will get called from not the `InventoryUI` script.
+<br>
+
+The `SwapItems` function just swaps the `items` in the `Item` list. The visual `UI` changes are done in the `InventorySlot` script where this function will get called from not the `InventoryUI` script.
 ```cs
 public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 {
