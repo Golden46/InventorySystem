@@ -303,4 +303,52 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 }
 ```
 
+
 ## Scripting - User Interface
+
+### [InventoryUI](InventoryUI.md)
+This script is handles updating the info in the slots when items are added or swapped in the inventory.
+
+```cs
+using System.Collections.Generic;
+using UnityEngine;
+
+public class InventoryUI : MonoBehaviour
+{
+    public GameObject slotPrefab;
+    public Transform inventoryPanel;
+
+    public List<InventorySlot> inventorySlots;
+
+    public void UpdateInventory(Inventory playerInventory){...}
+
+    public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot){...}
+}
+```
+
+The `UpdateInventory` Function fist loops through every slot in the inventory and deletes them all. Then for every item in the `Items` list it instantiates a new slot for that item under the `inventoryPanel` object. In then finds the '
+```cs
+public void UpdateInventory(Inventory playerInventory)
+{
+    foreach (Transform child in inventoryPanel) Destroy(child.gameObject);
+    
+    foreach (var item in playerInventory.Items)
+    {
+        GameObject newSlot = Instantiate(slotPrefab, inventoryPanel);
+        InventorySlot slotComponent = newSlot.GetComponent<InventorySlot>();
+        slotComponent.SetItem(item);
+    }
+}
+```
+
+```cs
+public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
+{
+    InventoryItem fromItem = fromSlot.currentItem;
+    fromSlot.SetItem(toSlot.currentItem);
+    toSlot.SetItem(fromItem);
+}
+```
+
+>[!IMPORTANT]
+> At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier.
