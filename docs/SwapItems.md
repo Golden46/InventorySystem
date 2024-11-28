@@ -1,4 +1,4 @@
-# SwapItems
+# Inventory / SwapItems
 
 ### Declaration
 public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
