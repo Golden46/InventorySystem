@@ -1,4 +1,4 @@
-# RemoveItem
+# Inventory / RemoveItem
 
 ### Declaration
 public void RemoveItem(InventoryItem item)
