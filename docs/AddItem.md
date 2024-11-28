@@ -1,4 +1,4 @@
-# AddItem
+# Inventory / AddItem
 
 ### Declaration
 public bool AddItem(InventoryItem item)
