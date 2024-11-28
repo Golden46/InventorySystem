@@ -14,6 +14,7 @@
   - [Inventory](#inventory)
   - [PlayerInventory](#playerinventory)
 - [Scripting - User Interface](#scripting---user-interface)
+  - [InventoryUI](#inventoryui)
 
 ## Prerequisites
 Before being able to follow this tutorial you will need to have the correct version of Unity installed and a development IDE. 
@@ -29,6 +30,7 @@ Additionally, you will need basic understanding of a few intermediate programmin
 - Scriptable Objects
 - Abstract Classes
 
+Before you start the tutorial, if you would like more information about each script and function, you can click on the script header and it will take you to a seperate page where you can explore it in more technical detail.
 
 ## Objectives
 
@@ -41,8 +43,7 @@ First, you will need to create a Unity 3D project. This was created using the Un
 > In this section, we are going to be creating a way for us to store our item data which can then be used in the inventory. 
 
 ### [Inventory Item](InventoryItem.md)
-To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed
-for a functional inventory.
+To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed for a functional inventory.
 
 > [!IMPORTANT]
 > This class is abstract and a `Scriptable Object`; You should have previous knowledge of what these things are before attempting this tutorial.
@@ -219,7 +220,12 @@ public void RemoveItem(InventoryItem item)
 This is the script for the players inventory.
 
 >[!IMPORTANT]
-> This script inherits from `MonoBehaviour` and not `Inventory`. This is because we are using the `Inventory` script to create instances of it instead. Also, we will be creating the `InventoryUI` script after this script. However, this script requires that script to function. If you get an error due to missing the `InventoryUI` reference you can just comment out the code until we create the script. 
+> This script inherits from `MonoBehaviour` and not `Inventory`. This is because we are using the `Inventory` script to create instances of it instead. Also, we will be creating the `InventoryUI` script after this script. However, this script requires that script to function. If you get an error due to missing the `InventoryUI` reference you can just comment out the code until we create the script.
+
+The `Start` function creates a new instance of an `Inventory` and then gets a reference to the `FirstPersonController` script. 
+
+>[!NOTE]
+> Make sure you change any reference to `FirstPersonController` to whatever your own FPS script is called unless you are using the one I have provided.
 ```cs
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -307,7 +313,10 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 ## Scripting - User Interface
 
 ### [InventoryUI](InventoryUI.md)
-This script is handles updating the info in the slots when items are added or swapped in the inventory.
+This script handles updating the info in the slots when items are added or swapped in the inventory.
+
+>[!NOTE]
+> This script will not function at first. It requires the `InventorySlot` script which we will be making after. You should get a few errors until that script is created, you do not need to worry about them.
 
 ```cs
 using System.Collections.Generic;
@@ -325,8 +334,9 @@ public class InventoryUI : MonoBehaviour
     public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot){...}
 }
 ```
+<br>
 
-The `UpdateInventory` Function fist loops through every slot in the inventory and deletes them all. Then for every item in the `Items` list it instantiates a new slot for that item under the `inventoryPanel` object. In then finds the '
+The `UpdateInventory` Function fist loops through every slot in the inventory and deletes them all. Then for every item in the `Items` list it instantiates a new slot for that item under the `inventoryPanel` object. It then finds the `InventorySlot` script (which we will be creating next) on the slot and calls the `SetItem` function while passing in the item.
 ```cs
 public void UpdateInventory(Inventory playerInventory)
 {
@@ -340,7 +350,9 @@ public void UpdateInventory(Inventory playerInventory)
     }
 }
 ```
+<br>
 
+The `SwapItems` script is called in the `InventorySlot` script when an item is detected to be swapped in the inventory. It is very similar to the `SwapItems` function on the `Inventory` script but instead of swapping the position in a list, it is swapping the slot data around. 
 ```cs
 public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 {
@@ -351,4 +363,4 @@ public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 ```
 
 >[!IMPORTANT]
-> At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier.
+> At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier if you went and did that to remove the errors. If you would like, you can do the same in this script for every reference to `InventorySlot`.
