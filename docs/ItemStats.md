@@ -1,4 +1,4 @@
-# ItemStats
+# InventoryItem / ItemStats
 
 ### Declaration
 public Dictionary<string, int> ItemStats();
