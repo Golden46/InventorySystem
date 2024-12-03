@@ -1,21 +1,6 @@
 # Inventory System Tutorial
 > This tutorial will cover how to create this inventory system for yourself and it will fully explain each section in detail.
 
-
-## Quick Links
-- [Prerequisites](#prerequisites)
-- [Objectives](#objectives)
-- [Setting up the scene](#setting-up-the-scene)
-- [Scripting - Items](#scripting---items)
-  - [Inventory Item](#inventory-item)
-  - [Sword](#sword)
-  - [Ore](#ore)
-- [Scripting - Inventory Functionality](#scripting---inventory-functionality)
-  - [Inventory](#inventory)
-  - [PlayerInventory](#playerinventory)
-- [Scripting - User Interface](#scripting---user-interface)
-  - [InventoryUI](#inventoryui)
-
 ## Prerequisites
 Before being able to follow this tutorial you will need to have the correct version of Unity installed and a development IDE. 
 This project was created using Unity 2022.3.46f1 and Rider, although you can use any code editor you like.
@@ -30,7 +15,7 @@ Additionally, you will need basic understanding of a few intermediate programmin
 - Scriptable Objects
 - Abstract Classes
 
-Before you start the tutorial, if you would like more information about each script and function, you can click on the script header and it will take you to a seperate page where you can explore the proper documentation.
+This tutorial is quite long, if you somehow miss where you were at you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script and function, you can click on the script header and it will take you to a seperate page where you can explore the proper documentation.
 
 ## Objectives
 
