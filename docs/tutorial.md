@@ -311,6 +311,7 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 
 
 ## Scripting - User Interface
+> In this section we will be creating all of the visual and interactivity elements of the inventory.
 
 ### [InventoryUI](InventoryUI.md)
 This script handles updating the info in the slots when items are added or swapped in the inventory.
@@ -363,4 +364,8 @@ public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 ```
 
 >[!IMPORTANT]
-> At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier if you went and did that to remove the errors. If you would like, you can do the same in this script for every reference to `InventorySlot`.
+> At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier if you did that to remove the errors. If you would like, you can do the same in this script for every reference to `InventorySlot` to prevent errors from popping up.
+
+
+### [InventorySlot](InventorySlot.md)
+This script handles the way slots are dragged, added and removed.
