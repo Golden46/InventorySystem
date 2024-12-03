@@ -201,7 +201,7 @@ public void RemoveItem(InventoryItem item)
 
 ***
 
-### [PlayerInventory](PlayerInventory.md)
+### [PlayerInventory](PlayerInventory/PlayerInventory.md)
 This is the script for the players inventory.
 
 >[!IMPORTANT]
