@@ -15,9 +15,9 @@ Additionally, you will need basic understanding of a few intermediate programmin
 - Scriptable Objects
 - Abstract Classes
 
-This tutorial is quite long, if you somehow miss where you were at you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script and function, you can click on the script header and it will take you to a seperate page where you can explore the proper documentation.
 
-## Objectives
+## Information & Objectives
+This tutorial is quite long, if you somehow miss where you were at you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script and function, you can click on the script header and it will take you to a seperate page where you can explore the proper documentation.
 
 
 ## Setting up the scene
