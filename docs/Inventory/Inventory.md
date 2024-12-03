@@ -11,5 +11,5 @@
 |name|description|
 |-|-|
 |[AddItem](AddItem.md)|Adds item to the Items list if there is a free slot.|
-|[SwapItems](SwapItems.md)|Swaps two items in the Items list that have been dragged by the player.|
+|[SwapItems](../PlayerInventoty/SwapItems.md)|Swaps two items in the Items list that have been dragged by the player.|
 |[RemoveItem](RemoveItem.md)|Removes an item from the Items list if it exists.|
