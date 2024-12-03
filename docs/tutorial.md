@@ -228,15 +228,15 @@ public class PlayerInventory : MonoBehaviour
         _fpc = FindObjectOfType<FirstPersonController>();
     }
 
-    public void ToggleInventory(InputAction.CallbackContext context){...}
+    public void ToggleInventory(InputAction.CallbackContext context){ ... }
 
-    private void SetCursorState(bool isInventoryOpen){...}
+    private void SetCursorState(bool isInventoryOpen){ ... }
 
-    public bool PickupItem(InventoryItem item){...}
+    public bool PickupItem(InventoryItem item){ ... }
 
-    public void DropItem(InventoryItem item){...}
+    public void DropItem(InventoryItem item){ ... }
 
-    public void SwapItems(InventoryItem fromItem, InventoryItem toItem){...}
+    public void SwapItems(InventoryItem fromItem, InventoryItem toItem){ ... }
 }
 ```
 <br>
@@ -354,3 +354,145 @@ public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 
 ### [InventorySlot](InventorySlot.md)
 This script handles the way slots are dragged, added and removed.
+
+```cs
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
+
+public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+{
+    public InventoryItem currentItem;
+    public Image icon;
+    public string itemStats;
+
+    [SerializeField] private GameObject statPanel;
+    [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private TextMeshProUGUI stats;
+
+    private PlayerInventory _playerInventory;
+    private Transform _playerTransform;
+    private Transform _originalParent;
+    private CanvasGroup _canvasGroup;
+
+    private void Awake()
+    {
+        _playerInventory = FindObjectOfType<PlayerInventory>();
+        _canvasGroup = icon.GetComponent<CanvasGroup>();
+        _playerTransform = GameObject.FindWithTag("Player").transform;
+    }
+
+    public void SetItem(InventoryItem item){ ... }
+
+    private void SetItemStats(InventoryItem item){ ... }
+
+    public void OnBeginDrag(PointerEventData eventData){ ... }
+
+    public void OnDrag(PointerEventData eventData){ ... }
+
+    public void OnEndDrag(PointerEventData eventData){ ... }
+
+    public void OnDrop(PointerEventData eventData){ ... }
+
+    private void DropItemInWorld(){ ... }
+
+    public void OnPointerEnter(PointerEventData eventData){ ... }
+
+    public void OnPointerExit(PointerEventData eventData){ ... }
+}
+```
+
+```cs
+public void SetItem(InventoryItem item)
+{
+    currentItem = item;
+    icon.sprite = item.itemIcon;
+
+    itemName.text = item.name;
+    SetItemStats(currentItem);
+}
+```
+
+```cs
+private void SetItemStats(InventoryItem item)
+{
+    itemStats = "";
+    foreach (KeyValuePair<string, int> kvp in item.ItemStats()) itemStats += $"{kvp.Key}: {kvp.Value}\n";
+    stats.text = itemStats;
+}
+```
+
+```cs
+public void OnBeginDrag(PointerEventData eventData)
+{
+    OnPointerExit(eventData);
+
+    _originalParent = icon.transform.parent;
+    icon.transform.SetParent(transform.root);
+    _canvasGroup.blocksRaycasts = false;
+}
+```
+
+```cs
+public void OnDrag(PointerEventData eventData)
+{
+    icon.transform.position = eventData.position;
+}
+```
+
+```cs
+public void OnEndDrag(PointerEventData eventData)
+{
+    icon.transform.SetParent(_originalParent);
+    icon.transform.localPosition = Vector3.zero;
+    _canvasGroup.blocksRaycasts = true;
+
+    if (!RectTransformUtility.RectangleContainsScreenPoint((RectTransform)transform.parent, eventData.position))
+    {
+        DropItemInWorld();
+        Destroy(gameObject);
+    }
+}
+```
+
+```cs
+public void OnDrop(PointerEventData eventData)
+{
+    InventorySlot draggedSlot = eventData.pointerDrag.GetComponent<InventorySlot>();
+
+    if (draggedSlot != null && draggedSlot != this)
+    {
+        InventoryUI inventoryUI = GetComponentInParent<InventoryUI>();
+        inventoryUI.SwapItems(draggedSlot, this);
+        _playerInventory.SwapItems(draggedSlot.currentItem, this.currentItem);
+    }
+}
+```
+
+```cs
+private void DropItemInWorld()
+{
+    Vector3 dropPosition = _playerTransform.position + _playerTransform.right * 2;
+    _playerInventory.DropItem(currentItem);
+    Instantiate(currentItem.prefab, dropPosition, Quaternion.identity);
+}
+```
+
+```cs
+public void OnPointerEnter(PointerEventData eventData)
+{
+    statPanel.SetActive(true);
+    statPanel.transform.SetParent(transform.parent);
+    statPanel.transform.SetAsLastSibling();
+}
+```
+
+```cs
+public void OnPointerExit(PointerEventData eventData)
+{
+    statPanel.SetActive(false);
+    statPanel.transform.SetParent(transform);
+}
+```
