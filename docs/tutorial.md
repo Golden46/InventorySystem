@@ -27,7 +27,7 @@ First, you will need to create a Unity 3D project. This was created using the Un
 ## Scripting - Items
 > In this section, we are going to be creating a way for us to store our item data which can then be used in the inventory. 
 
-### [Inventory Item](InventoryItem.md)
+### [Inventory Item](Items/InventoryItem.md)
 To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed for a functional inventory.
 
 > [!IMPORTANT]
@@ -62,7 +62,7 @@ public abstract class InventoryItem : ScriptableObject
 
 ***
 
-### [Sword](Sword.md)
+### [Sword](Items/Sword.md)
 Now that we have our base class, we can start to make some item classes we want in our game. Here is an example of an item class for a sword. It has a sharpness, attack speed, guard ability, and durability stat.
 
 >[!IMPORTANT]
@@ -105,7 +105,7 @@ public class Sword : InventoryItem
 
 ***
 
-### [Ore](Ore.md)
+### [Ore](Items/Ore.md)
 This is an example of another item type we could have in our game. You can make any items you want, you don't have to follow these exactly.
 
 >[!NOTE]
