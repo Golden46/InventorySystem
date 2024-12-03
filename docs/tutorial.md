@@ -352,7 +352,7 @@ public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 > At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier if you did that to remove the errors. If you would like, you can do the same in this script for every reference to `InventorySlot` to prevent errors from popping up.
 
 
-### [InventorySlot](InventorySlot.md)
+### [InventorySlot](InventorySlot/InventorySlot.md)
 This script handles the way slots are dragged, added and removed.
 
 ```cs
