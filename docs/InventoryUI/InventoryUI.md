@@ -12,4 +12,4 @@
 |name|description|
 |-|-|
 |[UpdateInventory](UpdateInventory.md)|Updates the `slots` every time an `item` change happens.|
-|[SwapItems](SwapItemsUI.md)|Switches the `item data` between `slots`.|
+|[SwapItems](SwapItems.md)|Switches the `item data` between `slots`.|
