@@ -298,7 +298,7 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 ## Scripting - User Interface
 > In this section we will be creating all of the visual and interactivity elements of the inventory.
 
-### [InventoryUI](InventoryUI.md)
+### [InventoryUI](InventoryUI/InventoryUI.md)
 This script handles updating the info in the slots when items are added or swapped in the inventory.
 
 >[!NOTE]
