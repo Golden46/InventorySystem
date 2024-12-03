@@ -11,5 +11,5 @@
 ### Public Methods
 |name|description|
 |-|-|
-|[UpdateInventory](UpdateInventory.md)|Adds a new `slot` every time an `item` is picked up.|
+|[UpdateInventory](UpdateInventory.md)|Updates the `slots` every time an `item` change happens.|
 |[SwapItems](SwapItemsUI.md)|Switches the `item data` between `slots`.|
