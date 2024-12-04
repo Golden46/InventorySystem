@@ -7,34 +7,36 @@ This project was created using Unity 2022.3.46f1 and Rider, although you can use
 
 If you need help installing this version of unity please go [here](INSTALLUNITY.md) and follow the steps as needed.
 
-Additionally, you will need basic understanding of a few intermediate programming concepts:
+Next, you will need to have a functioning first person controller with a way to interact with objects. You can use your own you made or from a tutorial, follow [my tutorial]() to create one, or [download mine](). This tutorial will be using Unitys New Input System, however if you are confident enough the code can be easily edited to use the old system. 
+
+Additionally, you will need basic understanding of a few intermediate programming concepts such as:
 - Dictionaries
 - Inheritance
 - Attributes
-- Unitys New Input System
 - Scriptable Objects
 - Abstract Classes
+- Interfaces
+- and More
 
 
 ## Information & Objectives
-This tutorial is quite long, if you somehow miss where you were at you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script and function, you can click on the script header and it will take you to a seperate page where you can explore the proper documentation.
-
+This tutorial is quite long, if you somehow miss where you were at, you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script, function, varable etc... you can click on the script name highlighted in blue and it will take you to a seperate page where you can explore the proper documentation.
 
 ## Setting up the scene
 First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder pipeline but it can be created the same using the Built-In Render Pipeline too.
 
 
 ## Scripting - Items
-> In this section, we are going to be creating a way for us to store our item data which can then be used in the inventory. 
+> In this section, we are going to be creating a way for us to store our `item data` which can then be used in the `inventory`. 
 
 ### [Inventory Item](Items/InventoryItem.md)
-To start off, we will create the base class for every item in our game. This class is going to contain all of the important item information needed for a functional inventory.
+To start off, we will create the `base class` for every item in our game. This class is going to contain all of the important `item information` needed for a functional inventory.
 
 > [!IMPORTANT]
-> This class is abstract and a `Scriptable Object`; You should have previous knowledge of what these things are before attempting this tutorial.
+> This `class` is `abstract` and is also a `Scriptable Object`; You should have previous knowledge of what both of these concepts are before attempting this tutorial.
 
 > [!NOTE]
-> This `Scriptable Object` will never be created as an asset we can use. All of our item types will have seperate objects that all inherit from this class. The abstract function at the bottom of the script will be overriden later on in our item classes order to get the item stats from each seperate item so it can be displayed in our inventory.
+> This `Scriptable Object` will never be created as an asset we can use. All of our `item types` will have seperate scripts that all `inherit` from this `class`. The `abstract function` at the bottom of the script will be overriden later on in our item classes order to get the item stats from each seperate item so it can be displayed in our inventory.
 
 ```cs
 using UnityEngine;
@@ -58,18 +60,18 @@ public abstract class InventoryItem : ScriptableObject
 ```
 
 > [!TIP]
-> So you can easily view the data in the inspector, you should add headers to your properties. In this script I have added a header for the item info and stack info to help organise it.
+> So you can easily view the data in the inspector, you should add `headers` to your properties. In this script I have added a header for the `item info` and `stack info` to help organise it.
 
 ***
 
 ### [Sword](Items/Sword.md)
-Now that we have our base class, we can start to make some item classes we want in our game. Here is an example of an item class for a sword. It has a sharpness, attack speed, guard ability, and durability stat.
+Now that we have our base class, we can start to make some `item classes` we want in our game. Here is an example of an item class for a `sword`. It has a `sharpness`, `attack speed`, `guard ability`, and `durability` stat.
 
 >[!IMPORTANT]
 > This item is also a `Scriptable Object` and will be created as an asset. It is important to realise that it inherits from `InventoryItem` because we want to have those properties on our sword as well as the ones that are unique to just this item.
 
 >[!NOTE]
-> The `ItemStats` function at the bottom is called the exact same as the one in the `InventoryItem` script. This is really important because it needs to override the function in the base class in order to work properly. We need a way to get the items stats and display them on the screen, and using this method to return them in the form of a `dictionary` works really well when you need to proceduraly show different types of stats.
+> The `ItemStats` function at the bottom is called the exact same as the one in the `InventoryItem` script. This is really important because it needs to `override` the function in the base class in order to work properly. We need a way to get the `items stats` and display them on the screen, and using this method to return them in the form of a `dictionary` works really well when you need to proceduraly show different types of stats.
 
 ```cs
 using UnityEngine;
@@ -135,13 +137,13 @@ public class Ore : InventoryItem
 
 
 ## Scripting - Inventory Functionality
-> In the section we will be creating the functional part of the system. We will be writing the code to add, remove, swap items and more.
+> In the section we will be creating the functional part of the system. We will be writing the code to `add`, `remove`, `swap` items and more.
 
 ### [Inventory](Inventory.md)
-This is the base inventory class for our system. All of our inventories we create will use this class as its foundation.
+This is the `base inventory class` for our system. All of our inventories we create will use this class as its `foundation`.
 
 > [!IMPORTANT]
-> You should realise that this class does not inherit from any scripting API such as `MonoBehaviour`. This is because the script will never be in the scene and does not require anything from `MonoBehaviour` to function as it is only used for backend work.
+> You should realise that this class `does not` inherit from any scripting API such as `MonoBehaviour`. This is because the script will never be in the scene and does not require anything from `MonoBehaviour` to function as it is only used for backend work.
  
 ```cs
 using System.Collections.Generic;
@@ -160,7 +162,7 @@ public class Inventory
 ```
 <br>
 
-The `AddItem` function first checks if the amount of Items in the list is more than or equal to the MaxSlots in the Inventory. If it is then it will return false and not add the item to the Item list. If it isn't then the item will be added to the list.
+The `AddItem` function first checks if the amount of items in the list is more than or equal to the `MaxSlots` in the Inventory. If it is then it will `return` `false` and not add the item to the Item list. If it isn't then the item will be added to the list.
 ```cs
 public bool AddItem(InventoryItem item)
 {
@@ -171,10 +173,10 @@ public bool AddItem(InventoryItem item)
 ```
 <br>
 
-The `SwapItems` function first checks if the items being swapped are both in the Items list. If they are it will get the index of the first item and put it into a a placeholder variable for use later. It then gets the index of the second item and sets the first item to that index. Lastly it will place the second item into the index of the first item.
+The `SwapItems` function first checks if the items being swapped are both in the `Items` list. If they are, it will get the index of the `fromItem` and put it into the placeholder variable `idx` for use later. It then gets the `index` of the `toItem` and sets the `fromItem` to that position. This is why we needed to store the `fromItem` index in that placeholder variable. The `fromItem` index is now the same as what the `toItem` index was at the start. We need the old position which is stored in the `idx` variable. So, lastly it will place the `toItem` into the position where the `fromItem` was originaly using the placeholder variable.
 
 >[!WARNING]
-> You need to have that placeholder variable. If you switch the first two items before getting both of the indexes then when you go to get the second items index it will have already changed and you will have no reference of where it came from.
+> You need to have that placeholder variable. If you move the `fromItem` before storing its `index` in a placeholder variable then when you go to slot the `toItem` into its index it will have changed and you will be slotting the `toItem` back into its original position.
 ```cs
 public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 {
@@ -210,7 +212,7 @@ This is the script for the players inventory.
 The `Start` function creates a new instance of an `Inventory` and then gets a reference to the `FirstPersonController` script. 
 
 >[!NOTE]
-> Make sure you change any reference to `FirstPersonController` to whatever your own FPS script is called unless you are using the one I have provided.
+> Make sure you change any reference to `FirstPersonController` to whatever your own FPS script is called unless you are using the one I have provided or the one I created in the tutorial which are both the same.
 ```cs
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -241,7 +243,7 @@ public class PlayerInventory : MonoBehaviour
 ```
 <br>
 
-The `ToggleInventory` function is used to open and close the player inventory. First it checks the state of the inventory; If it is open the `isInventoryOpen` bool will be false and vice versa. It then sets toggles the 'InventoryUI' 'GameObject' on or off. Next, the cursor state will be toggled using the next function. Lastly, the player will be unable to look around and interact when the inventory is open to prevent any unwanted functionality like accidently picking up an item while trying to drag an item in the inventory.
+The `ToggleInventory` function is used to open and close the player inventory. First it checks the state of the inventory; If it is open the `isInventoryOpen` bool will be `false` and vice versa. It then sets toggles the `InventoryUI` `GameObject` on or off. Next, the `cursor state` will be toggled using the next function. Lastly, the player will be unable to look around and interact when the inventory is open to prevent any unwanted functionality like accidently picking up an item while trying to drag an item in the inventory.
 ```cs
 public void ToggleInventory(InputAction.CallbackContext context)
 {
@@ -265,7 +267,7 @@ private void SetCursorState(bool isInventoryOpen)
 ```
 <br>
 
-The `PickupItem` function first attempts to add the `item` to the `Item` list and then updates the `UI` to display it. It then `returns true or false` depending on whether the item was added or not.
+The `PickupItem` function first attempts to add the `item` to the `Item` list and then updates the `UI` to display it. It then `returns` `true` or `false` depending on whether the item was added or not.
 ```cs
 public bool PickupItem(InventoryItem item)
 {
@@ -299,7 +301,7 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 > In this section we will be creating all of the visual and interactivity elements of the inventory.
 
 ### [InventoryUI](InventoryUI/InventoryUI.md)
-This script handles updating the info in the slots when items are added or swapped in the inventory.
+This script handles `updating` the `info` in the `slots` when items are `added` or `swapped` in the inventory.
 
 >[!NOTE]
 > This script will not function at first. It requires the `InventorySlot` script which we will be making after. You should get a few errors until that script is created, you do not need to worry about them.
@@ -355,6 +357,10 @@ public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 ### [InventorySlot](InventorySlot/InventorySlot.md)
 This script handles the way slots are dragged, added and removed.
 
+The `Awake` function gets a reference to the `PlayerInventory` on the player, `CanvasGroup` on the icon of the slot, and `transform` of the player.
+
+>[!NOTE]
+> All of the "Handlers" are `interfaces` in `UnityEngine.EventSystems`. A simpler way to implement these "events" would be to use the `Event Trigger` componenent which only requires simple drag-and-drop functions with more limited coding. However making use of `interfaces` means it is: Fully customisable to your liking in code, runs faster therby being more efficient and direct, and `PointerEventData` is directly provided in the `Method` without having to cast `BaseEventData`. If you are confident enough, you would be fully able to slightly alter my code here to fit in with the use of `Event Triggers`.
 ```cs
 using System.Collections.Generic;
 using UnityEngine;
@@ -403,6 +409,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnPointerExit(PointerEventData eventData){ ... }
 }
 ```
+<br>
 
 ```cs
 public void SetItem(InventoryItem item)
@@ -414,6 +421,7 @@ public void SetItem(InventoryItem item)
     SetItemStats(currentItem);
 }
 ```
+<br>
 
 ```cs
 private void SetItemStats(InventoryItem item)
@@ -423,6 +431,7 @@ private void SetItemStats(InventoryItem item)
     stats.text = itemStats;
 }
 ```
+<br>
 
 ```cs
 public void OnBeginDrag(PointerEventData eventData)
@@ -434,6 +443,7 @@ public void OnBeginDrag(PointerEventData eventData)
     _canvasGroup.blocksRaycasts = false;
 }
 ```
+<br>
 
 ```cs
 public void OnDrag(PointerEventData eventData)
@@ -441,6 +451,7 @@ public void OnDrag(PointerEventData eventData)
     icon.transform.position = eventData.position;
 }
 ```
+<br>
 
 ```cs
 public void OnEndDrag(PointerEventData eventData)
@@ -456,6 +467,7 @@ public void OnEndDrag(PointerEventData eventData)
     }
 }
 ```
+<br>
 
 ```cs
 public void OnDrop(PointerEventData eventData)
@@ -470,6 +482,7 @@ public void OnDrop(PointerEventData eventData)
     }
 }
 ```
+<br>
 
 ```cs
 private void DropItemInWorld()
@@ -479,6 +492,7 @@ private void DropItemInWorld()
     Instantiate(currentItem.prefab, dropPosition, Quaternion.identity);
 }
 ```
+<br>
 
 ```cs
 public void OnPointerEnter(PointerEventData eventData)
@@ -488,6 +502,7 @@ public void OnPointerEnter(PointerEventData eventData)
     statPanel.transform.SetAsLastSibling();
 }
 ```
+<br>
 
 ```cs
 public void OnPointerExit(PointerEventData eventData)
@@ -496,3 +511,4 @@ public void OnPointerExit(PointerEventData eventData)
     statPanel.transform.SetParent(transform);
 }
 ```
+<br>
