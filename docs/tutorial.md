@@ -411,18 +411,22 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 ```
 <br>
 
+The `SetItem` function is called when an `item` is added to the `slot`. This could be when a new item is added or when items are swapped. First, the `InventoryItem` is set and then the `sprite` is changed to reflect the icon. Next, the name of the item is put in the `TextMeshProGUI` component to be displayed on the slot and the `SetItemStats` function is called.
 ```cs
 public void SetItem(InventoryItem item)
 {
     currentItem = item;
-    icon.sprite = item.itemIcon;
+    icon.sprite = currentItem.itemIcon;
 
-    itemName.text = item.name;
+    itemName.text = currentItem.name;
     SetItemStats(currentItem);
 }
 ```
 <br>
 
+
+>[!NOTE]
+> You don't need a separate function to set the item stats, I just like to make my code look more readable and less crowded. If you like, you can move the contents of this function into the last one.
 ```cs
 private void SetItemStats(InventoryItem item)
 {
