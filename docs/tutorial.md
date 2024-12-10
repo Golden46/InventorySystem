@@ -140,7 +140,7 @@ public class Ore : InventoryItem
 > In the section we will be creating the functional part of the system. We will be writing the code to `add`, `remove`, `swap` items and more.
 
 ### [Inventory](Inventory.md)
-This is the `base inventory class` for our system. All of our inventories we create will use this class as its `foundation`.
+This is the `base inventory class` for our system. All of our inventories we create will use this class as its foundation.
 
 > [!IMPORTANT]
 > You should realise that this class `does not` inherit from any scripting API such as `MonoBehaviour`. This is because the script will never be in the scene and does not require anything from `MonoBehaviour` to function as it is only used for backend work.
@@ -166,9 +166,9 @@ The `AddItem` function first checks if the amount of items in the list is more t
 ```cs
 public bool AddItem(InventoryItem item)
 {
-  if (Items.Count >= MaxSlots) return false;
-  Items.Add(item);
-  return true;
+    if (Items.Count >= MaxSlots) return false;
+    Items.Add(item);
+    return true;
 }
 ```
 <br>
@@ -180,12 +180,12 @@ The `SwapItems` function first checks if the items being swapped are both in the
 ```cs
 public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 {
-  if (Items.Contains(fromItem) && Items.Contains(toItem))
-  {
-    var idx = Items.IndexOf(fromItem);
-    Items[Items.IndexOf(toItem)] = fromItem;
-    Items[idx] = toItem;
-  }
+    if (Items.Contains(fromItem) && Items.Contains(toItem))
+    {
+        var idx = Items.IndexOf(fromItem);
+        Items[Items.IndexOf(toItem)] = fromItem;
+        Items[idx] = toItem;
+    }
 }
 ```
 <br>
@@ -194,10 +194,10 @@ The `RemoveItem` function first checks if the item being removed exists in the l
 ```cs
 public void RemoveItem(InventoryItem item)
 {
-  if (Items.Contains(item)) 
-  {
-    Items.Remove((item));
-  }
+    if (Items.Contains(item)) 
+    {
+        Items.Remove((item));
+    }
 }
 ```
 
@@ -247,12 +247,12 @@ The `ToggleInventory` function is used to open and close the player inventory. F
 ```cs
 public void ToggleInventory(InputAction.CallbackContext context)
 {
-  bool isInventoryOpen = !inventoryUI.gameObject.activeInHierarchy;
-  inventoryUI.gameObject.SetActive(isInventoryOpen);
-  SetCursorState(isInventoryOpen);
-
-  _fpc.canLook = !isInventoryOpen;
-  _fpc.canInteract = !isInventoryOpen;
+    bool isInventoryOpen = !inventoryUI.gameObject.activeInHierarchy;
+    inventoryUI.gameObject.SetActive(isInventoryOpen);
+    SetCursorState(isInventoryOpen);
+    
+    _fpc.canLook = !isInventoryOpen;
+    _fpc.canInteract = !isInventoryOpen;
 }
 ```
 <br>
@@ -261,8 +261,8 @@ The `SetCursorState` function toggles the `visiblity` and `lockState` of the cur
 ```cs
 private void SetCursorState(bool isInventoryOpen)
 {
-  Cursor.visible = isInventoryOpen;
-  Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
+    Cursor.visible = isInventoryOpen;
+    Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
 }
 ```
 <br>
@@ -271,9 +271,9 @@ The `PickupItem` function first attempts to add the `item` to the `Item` list an
 ```cs
 public bool PickupItem(InventoryItem item)
 {
-  bool added = _pInventory.AddItem(item);
-  inventoryUI.UpdateInventory(_pInventory);
-  return added;
+    bool added = _pInventory.AddItem(item);
+    inventoryUI.UpdateInventory(_pInventory);
+    return added;
 }
 ```
 <br>
@@ -282,8 +282,8 @@ The `DropItem` function removes the `item` from the `Item` list if it exists and
 ```cs
 public void DropItem(InventoryItem item)
 {
-  _pInventory.RemoveItem(item); 
-  inventoryUI.UpdateInventory(_pInventory);
+    _pInventory.RemoveItem(item); 
+    inventoryUI.UpdateInventory(_pInventory);
 }
 ```
 <br>
@@ -292,7 +292,7 @@ The `SwapItems` function just swaps the `items` in the `Item` list. The visual `
 ```cs
 public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 {
-  _pInventory.SwapItems(fromItem, toItem);
+    _pInventory.SwapItems(fromItem, toItem);
 }
 ```
 
@@ -424,9 +424,9 @@ public void SetItem(InventoryItem item)
 ```
 <br>
 
-
+The `SetItemStats` function resets the `itemStats` string and then pulls all of the stat names and values from the `item` `dictionary` and formats it into a string to be displayed to the player in the `inventory`.
 >[!NOTE]
-> You don't need a separate function to set the item stats, I just like to make my code look more readable and less crowded. If you like, you can move the contents of this function into the last one.
+> You don't need a separate function for this, I just like to make my code look more readable and less crowded. If you like, you can move the contents of this function into the `SetItem` function.
 ```cs
 private void SetItemStats(InventoryItem item)
 {
@@ -437,6 +437,7 @@ private void SetItemStats(InventoryItem item)
 ```
 <br>
 
+The `OnBeginDrag` event is called when the mouse is being held and has been dragged a certain `minimum threshold distance`. When this happens the `OnPointerExit` function is called which is explained further down. The next two lines saves the `slot` object in the `_originalParent` variable because the `icon` (which is a `child` of the `slot` object) gets taken out of the slot; This is so it can be dragged and easily swapped into a new slot. The last line of code makes sure to disable raycast blocking so other slots can be detected. 
 ```cs
 public void OnBeginDrag(PointerEventData eventData)
 {
@@ -449,6 +450,7 @@ public void OnBeginDrag(PointerEventData eventData)
 ```
 <br>
 
+The `OnDrag` event is called every frame when the object is being dragged. It makes the `icon` follow the `cursor` while it is being dragged.
 ```cs
 public void OnDrag(PointerEventData eventData)
 {
@@ -457,6 +459,7 @@ public void OnDrag(PointerEventData eventData)
 ```
 <br>
 
+The `OnEndDrag` event is called when the dragging ends. At this point it does the opposite of `OnBeginDrag` and puts the `icon` back in the `slot` as a child. It then enables blocking raycasts on the Canvas group agian. If the item is dragged outside of the `inventory` then it calls the `DropItemInWorld` function, which is explained later, and then `destroys` the `slot`.
 ```cs
 public void OnEndDrag(PointerEventData eventData)
 {
@@ -473,6 +476,7 @@ public void OnEndDrag(PointerEventData eventData)
 ```
 <br>
 
+The `OnDrop` event is called when an object accepts a drop. First it gets the `slot` that is being dragged into it and if it exists and isn't the same as itself it will swap the items.
 ```cs
 public void OnDrop(PointerEventData eventData)
 {
@@ -488,6 +492,7 @@ public void OnDrop(PointerEventData eventData)
 ```
 <br>
 
+The `DropItemInWorld` function is called when an `item` is ejected from the inventory. It will `instatiate` the `GameObject` of the item infront of the player and also remove the item from the inventory.
 ```cs
 private void DropItemInWorld()
 {
@@ -498,6 +503,7 @@ private void DropItemInWorld()
 ```
 <br>
 
+The `OnPointerEnter` function is used to show the displayed stats. There is no z-index for UI componenets so you have to pop the `stat panel` out of the `slot` and move it to the bottom after activating the panel in order to show it above the items in the inventory. `SetParent` changes moves that stat panel out a layer and `SetAsLastSibling` moves it to the end of the transform list.
 ```cs
 public void OnPointerEnter(PointerEventData eventData)
 {
@@ -508,6 +514,7 @@ public void OnPointerEnter(PointerEventData eventData)
 ```
 <br>
 
+The `OnPointerExit` function is used to hide the displayed stats. It just hides the `GameObject` and makes it a child of the `slot` again.
 ```cs
 public void OnPointerExit(PointerEventData eventData)
 {
