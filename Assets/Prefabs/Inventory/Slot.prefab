@@ -255,7 +255,6 @@ GameObject:
   - component: {fileID: 1324522649061102201}
   - component: {fileID: 4773163366187515950}
   - component: {fileID: 1895392957548194549}
-  - component: {fileID: 1670196093552256006}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -354,35 +353,6 @@ MonoBehaviour:
   statPanel: {fileID: 6864386812726613630}
   itemName: {fileID: 5853089610912703791}
   stats: {fileID: 2636764532366640494}
---- !u!114 &1670196093552256006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6558603944332204145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 13
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1895392957548194549}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &6864386812726613630
 GameObject:
   m_ObjectHideFlags: 0
