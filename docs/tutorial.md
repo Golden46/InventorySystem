@@ -7,7 +7,7 @@ This project was created using Unity 2022.3.46f1 and Rider, although you can use
 
 If you need help installing this version of unity please go [here](INSTALLUNITY.md) and follow the steps as needed.
 
-Next, you will need to have a functioning first person controller with a way to interact with objects. You can use your own you made or from a tutorial, follow [my tutorial]() to create one, or [download mine](). This tutorial will be using Unitys New Input System, however if you are confident enough the code can be easily edited to use the old system. 
+Next, you will need to have a functioning first person controller with a way to interact with objects. You can use your own you made or from a tutorial, follow [my tutorial]() to create one, or [download mine](). This tutorial will be using Unitys New Input System however, if you are confident enough, the code can be easily edited to use the old system. 
 
 Additionally, you will need basic understanding of a few intermediate programming concepts such as:
 - Dictionaries
@@ -22,15 +22,36 @@ Additionally, you will need basic understanding of a few intermediate programmin
 ## Information & Objectives
 This tutorial is quite long, if you somehow miss where you were at, you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script, function, varable etc... you can click on the script name highlighted in blue and it will take you to a seperate page where you can explore the proper documentation.
 
+
 ## Setting up the scene
-First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder pipeline but it can be created the same using the Built-In Render Pipeline too.
+First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder pipeline but it can be created the same using the Built-In Render Pipeline too. If you have downloaded my `First Person Controller` then you should already have a player you can move around. If not you will need your own.
+
+I like to set up my project hierarchy as follows.
+```
+- Assets
+    - Prefabs
+        - Inventory
+        - Ore
+        - Weapons
+    - Scripts
+        - Inventory
+            - Inventories
+            - Items
+                - Ore
+                - Swords
+            - UI
+        - Player
+            - Interact
+    - Sprites
+```
+You can ignore the `Player` folder if you have your own controller; If you downloaded mine or followed my tutorial then it will already be there.
 
 
-## Scripting - Items
+## Creating the Items
 > In this section, we are going to be creating a way for us to store our `item data` which can then be used in the `inventory`. 
 
-### [Inventory Item](Items/InventoryItem.md)
-To start off, we will create the `base class` for every item in our game. This class is going to contain all of the important `item information` needed for a functional inventory.
+### Script - [Inventory Item](Items/InventoryItem.md)
+To start off, we will create the `base class` for every item in our game. This class is going to contain all of the important `item information` needed for a functional inventory. Create this script in `Scripts > Inventory > Items`
 
 > [!IMPORTANT]
 > This `class` is `abstract` and is also a `Scriptable Object`; You should have previous knowledge of what both of these concepts are before attempting this tutorial.
@@ -64,8 +85,8 @@ public abstract class InventoryItem : ScriptableObject
 
 ***
 
-### [Sword](Items/Sword.md)
-Now that we have our base class, we can start to make some `item classes` we want in our game. Here is an example of an item class for a `sword`. It has a `sharpness`, `attack speed`, `guard ability`, and `durability` stat.
+### Script - [Sword](Items/Sword.md)
+Now that we have our base class, we can start to make some `item classes` we want in our game. Here is an example of an item class for a `sword`. It has a `sharpness`, `attack speed`, `guard ability`, and `durability` stat. Create this script in `Scripts > Inventory > Items > Swords`
 
 >[!IMPORTANT]
 > This item is also a `Scriptable Object` and will be created as an asset. It is important to realise that it inherits from `InventoryItem` because we want to have those properties on our sword as well as the ones that are unique to just this item.
@@ -107,8 +128,8 @@ public class Sword : InventoryItem
 
 ***
 
-### [Ore](Items/Ore.md)
-This is an example of another item type we could have in our game. You can make any items you want, you don't have to follow these exactly.
+### Script - [Ore](Items/Ore.md)
+This is an example of another item type we could have in our game. You can make any items you want, you don't have to follow these exactly. Create this script in `Scripts > Inventory > Ore`
 
 >[!NOTE]
 > The layout and functionality is exactly the same; The only things that changes is every instance of the name of the item and the properites associated with that item.
@@ -135,15 +156,64 @@ public class Ore : InventoryItem
 }
 ```
 
+***
 
-## Scripting - Inventory Functionality
-> In the section we will be creating the functional part of the system. We will be writing the code to `add`, `remove`, `swap` items and more.
+### Script - [ItemInteract](Items/ItemInteract.md)
+This is the script that will be used in order to `interact` with the item in the world to place it in the `inventory`.
 
-### [Inventory](Inventory.md)
-This is the `base inventory class` for our system. All of our inventories we create will use this class as its foundation.
+> [!WARNING]
+> This script will only work if you have downloaded my first person controller or followed my fps tutorial. If you have your own way to interact with items then you will need to adapt that to pick up items.
+
+The `OnInteract` function is called when a player clicks on the item in the world. This then calls the `PickUp` function which gets the player inventory script and attempts to place it in the inventory. If the item goes into the inventory then the object gets destroyed. 
+
+> [!NOTE]
+> The `OnFocus` and `OnLoseFocus` functions can be ignored because we don't need to do anything in those for this interaction but they have to be there otherwise the script will not work. This is because they are present in the `Interactable` function this script overrides and could be used in other interactioms in the future. They are called when you hover over or look away from the item.
+```cs
+public class ItemInteract : Interactable
+{
+    public InventoryItem item;
+    
+    public override void OnFocus(){}
+
+    public override void OnLoseFocus(){}
+
+    public override void OnInteract(){ PickUp(); }
+
+    private void PickUp()
+    {
+        PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
+
+        if (playerInventory == null) return;
+
+        if (playerInventory.PickupItem(item))
+        {
+            Destroy(gameObject);
+        }
+    }
+}
+```
+
+### Unity Editor - Creating the objects.
+Now these are created, go into the `Assets > Inventory > Items` folder. Now if you `Right click > Create > InventoryItem > Sword` you should be able to create a `Sword` `item`.
+
+![image](https://github.com/user-attachments/assets/2815306a-e15e-49e9-8db0-084f3ff403d3)
+
+Above is an example of a sword I created with all the values edited. Now you can create as many swords as you want and this process can also be repeated for the ores.
+
+Now you can create a prefab for the object in the world. First spawn in a `3D Cube` and attach the `ItemInteract` script to it or your equivalent. Whatever item you want that object to be, put the `ScriptableObject` item in the `Item` variable in the inspector. Then add a `RigidBody` so the item has physics. 
+
+![image](https://github.com/user-attachments/assets/98572c43-45c9-4895-a84d-0c47281730dc)
+
+Now you should be able to walk up to this object, and interact with it. Although at the moment it won't destroy because the `player inventory` script does not exist. You can add a `Debug.Log` in the `PickUp` function to check if your interaction is working.
+
+## Inventory Functionality
+> In the section we will be creating the functional part of the system. We will be writing the code to `add`, `remove`, `swap` items and more. 
+
+### Script - [Inventory](Inventory.md) 
+This is the `base inventory class` for our system. All of our inventories we create will use this class as its foundation. Create this script in `Scripts > Inventory`
 
 > [!IMPORTANT]
-> You should realise that this class `does not` inherit from any scripting API such as `MonoBehaviour`. This is because the script will never be in the scene and does not require anything from `MonoBehaviour` to function as it is only used for backend work.
+> You should realise that this class `does not` inherit from any scripting API such as `MonoBehaviour`. This is because the script will never be in the scene and does not require anything from `MonoBehaviour` to function as it is only used for backend work. Set the `MaxSlots` value to the maximum amount of slots your inventory will have and if this changes make sure to change this number to that value otherwise it will overflow.
  
 ```cs
 using System.Collections.Generic;
@@ -203,11 +273,11 @@ public void RemoveItem(InventoryItem item)
 
 ***
 
-### [PlayerInventory](PlayerInventory/PlayerInventory.md)
-This is the script for the players inventory.
+### Script - [PlayerInventory](PlayerInventory/PlayerInventory.md)
+This is the script for the players inventory. Create this script in `Scripts > Inventory > Inventories`. When the script is done, it should be attached to the `Player` in the scene.
 
 >[!IMPORTANT]
-> This script inherits from `MonoBehaviour` and not `Inventory`. This is because we are using the `Inventory` script to create instances of it instead. Also, we will be creating the `InventoryUI` script after this script. However, this script requires that script to function. If you get an error due to missing the `InventoryUI` reference you can just comment out the code until we create the script.
+> This script inherits from `MonoBehaviour` and not `Inventory`. This is because we are using the `Inventory` script to create instances of it instead. Also, we will be creating the `InventoryUI` script after this script. However, this script requires that script to function. If you get an error due to missing the `InventoryUI` reference you can just comment out the code until we create the script. 
 
 The `Start` function creates a new instance of an `Inventory` and then gets a reference to the `FirstPersonController` script. 
 
@@ -297,11 +367,11 @@ public void SwapItems(InventoryItem fromItem, InventoryItem toItem)
 ```
 
 
-## Scripting - User Interface
+## User Interface
 > In this section we will be creating all of the visual and interactivity elements of the inventory.
 
-### [InventoryUI](InventoryUI/InventoryUI.md)
-This script handles `updating` the `info` in the `slots` when items are `added` or `swapped` in the inventory.
+### Script - [InventoryUI](InventoryUI/InventoryUI.md)
+This script handles `updating` the `info` in the `slots` when items are `added` or `swapped` in the inventory. Create this script in `Scripts > Inventory > UI`
 
 >[!NOTE]
 > This script will not function at first. It requires the `InventorySlot` script which we will be making after. You should get a few errors until that script is created, you do not need to worry about them.
@@ -353,9 +423,8 @@ public void SwapItems(InventorySlot fromSlot, InventorySlot toSlot)
 >[!IMPORTANT]
 > At this stage you need to remember to uncomment out the code in the `PlayerInventory` script from earlier if you did that to remove the errors. If you would like, you can do the same in this script for every reference to `InventorySlot` to prevent errors from popping up.
 
-
-### [InventorySlot](InventorySlot/InventorySlot.md)
-This script handles the way slots are dragged, added and removed.
+### Script - [InventorySlot](InventorySlot/InventorySlot.md)
+This script handles the way slots are dragged, added and removed. Create this script in `Scripts > Inventory > UI`
 
 The `Awake` function gets a reference to the `PlayerInventory` on the player, `CanvasGroup` on the icon of the slot, and `transform` of the player.
 
@@ -523,3 +592,12 @@ public void OnPointerExit(PointerEventData eventData)
 }
 ```
 <br>
+
+### Creating the Inventory UI.
+First, create a new `Canvas` and call it `InventoryCanvas` then add the `InventoryUI` script to it. Now create a `Panel`, call it `ItemHolder`, and size it to how you want your inventory to look. Add the `Grid Layout Group` component to the `ItemHolder` and set the `Cell Size` to however big you want your slots to be - mine is `100x100`. You should also edit the `Spacing` and `Padding` until you get something you are happy with. To test how it looks create a `Button` under the `ItemHolder` and remove the `TextMeshProUGUI` component. Also, create a new `TextMeshProUGUI` component and set the text to `Inventory` and position it at the top of the `Panel`; Make this a child of `InventoryCanvas` not `ItemHolder`. 
+
+![image](https://github.com/user-attachments/assets/22f1520e-e761-4cd5-8c34-f4bcec4d0eeb)
+
+Now with that `Button` you created, name it to `Slot` and add the `InventorySlot` script to it. You also want to create an `Image` as a child and call it `Icon` - additionally, add the `Canvas Group` component to it. Then drag the `Icon GameObject` into the `Icon` slot on the `InventorySlot` script in the inspector. 
+
+TALK ABOUT STAT PANEL NEXT
