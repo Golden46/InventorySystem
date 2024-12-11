@@ -26,7 +26,7 @@ This tutorial is quite long, if you somehow miss where you were at, you can pres
 ## Setting up the scene
 First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder pipeline but it can be created the same using the Built-In Render Pipeline too. If you have downloaded my `First Person Controller` then you should already have a player you can move around. If not you will need your own.
 
-I like to set up my project hierarchy as follows.
+Set up your project hierarchy as follows.
 ```
 - Assets
     - Prefabs
