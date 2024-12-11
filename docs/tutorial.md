@@ -591,7 +591,8 @@ public void OnPointerExit(PointerEventData eventData)
     statPanel.transform.SetParent(transform);
 }
 ```
-<br>
+
+ ***
 
 ### Creating the Inventory UI.
 First, create a new `Canvas` and call it `InventoryCanvas` then add the `InventoryUI` script to it. Now create a `Panel`, call it `ItemHolder`, and size it to how you want your inventory to look. Add the `Grid Layout Group` component to the `ItemHolder` and set the `Cell Size` to however big you want your slots to be - mine is `100x100`. You should also edit the `Spacing` and `Padding` until you get something you are happy with. To test how it looks create a `Button` under the `ItemHolder` and remove the `TextMeshProUGUI` component. Also, create a new `TextMeshProUGUI` component and set the text to `Inventory` and position it at the top of the `Panel`; Make this a child of `InventoryCanvas` not `ItemHolder`. 
