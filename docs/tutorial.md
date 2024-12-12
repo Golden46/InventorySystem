@@ -56,9 +56,15 @@ To start off, we will create the `base class` for every item in our game. This c
 > [!IMPORTANT]
 > This `class` is `abstract` and is also a `Scriptable Object`; You should have previous knowledge of what both of these concepts are before attempting this tutorial.
 
-> [!NOTE]
-> This `Scriptable Object` will never be created as an asset we can use. All of our `item types` will have seperate scripts that all `inherit` from this `class`. The `abstract function` at the bottom of the script will be overriden later on in our item classes order to get the item stats from each seperate item so it can be displayed in our inventory.
+- The `id` property is to be able to uniquely identify each item.
+- The `itemName` property will hold the name of the `item`.
+- The `itemIcon` property will store the `Sprite` of the item which is what will be displayed to the player in the `inventory`.
+- In this tutorial we will not be making items stackable using the `isStackable` and `maxStackSize` properties, however you may add that on if you wish.
+- Finally, the `prefab` property will store the `GameObject` attached to the item so when it gets dragged out of the `inventory` it can be `instantiated`
+<br>
 
+> [!NOTE]
+> Simply, the class is made `abstract` because later on we are going to be storing every item currently in the `inventory` in a list of type `InventoryItem`. However, this class will never be used to create a `Scriptable Object`; All of our `item types` will have seperate scripts that all `inherit` from this `class`. This means that we are unable to access the `unique data` from each individual `item class`. We want to be able to access that data so the user can see the `stats` of each item. Making the class `abstract` allows us to create an `abstract` function at the bottom which will force it onto every class `inheriting` this one. So now we can call the `ItemStats` function and make a different one in each `item class` to return us the properties of that `item`.
 
 ```cs
 using UnityEngine;
@@ -90,10 +96,10 @@ public abstract class InventoryItem : ScriptableObject
 Now that we have our base class, we can start to make some `item classes` we want in our game. Here is an example of an item class for a `sword`. It has a `sharpness`, `attack speed`, `guard ability`, and `durability` stat. Create this script in `Scripts > Inventory > Items > Swords`
 
 >[!IMPORTANT]
-> This item is also a `Scriptable Object` and will be created as an asset. It is important to realise that it inherits from `InventoryItem` because we want to have those properties on our sword as well as the ones that are unique to just this item.
+> This item is a `Scriptable Object` and `inherits` from `InventoryItem`. This class will be used to create items. It is important to note that when an `item` is created using this class it will have both the properties from this class and the class it inherits from.
 
 >[!NOTE]
-> The `ItemStats` function at the bottom is called the exact same as the one in the `InventoryItem` script. This is really important because it needs to `override` the function in the base class in order to work properly. We need a way to get the `items stats` and display them on the screen, and using this method to return them in the form of a `dictionary` works really well when you need to proceduraly show different types of stats.
+> At the bottom we have the `ItemStats` function and as you can see it uses the `override` keyword. This is important because we are going to be `overidding` this for every `item class` we make so the correct stats get returned. Using this method to return the stats in the form of a `dictionary` works really well when you need to proceduraly show different types of stats.
 
 ```cs
 using UnityEngine;
@@ -130,7 +136,7 @@ public class Sword : InventoryItem
 ***
 
 ### Script - [Ore](Items/Ore.md)
-This is an example of another item type we could have in our game. You can make any items you want, you don't have to follow these exactly. Create this script in `Scripts > Inventory > Ore`
+This is an example of another `item type` we could have in our game. You can make any items you want, you don't have to follow these exactly. Create this script in `Scripts > Inventory > Ore`
 
 >[!NOTE]
 > The layout and functionality is exactly the same; The only things that changes is every instance of the name of the item and the properites associated with that item.
@@ -163,12 +169,12 @@ public class Ore : InventoryItem
 This is the script that will be used in order to `interact` with the item in the world to place it in the `inventory`.
 
 > [!WARNING]
-> This script will only work if you have downloaded my first person controller or followed my fps tutorial. If you have your own way to interact with items then you will need to adapt that to pick up items.
+> This script only works in conjunction with my first person controller. If you have downloaded my first person controller or followed my fps tutorial then it is fine yo use. If you have your own way to interact with items then you will need to adapt that to call the `PikcupItem` function every time the item is interacted with.
 
 The `OnInteract` function is called when a player clicks on the item in the world. This then calls the `PickUp` function which gets the player inventory script and attempts to place it in the inventory. If the item goes into the inventory then the object gets destroyed. 
 
 > [!NOTE]
-> The `OnFocus` and `OnLoseFocus` functions can be ignored because we don't need to do anything in those for this interaction but they have to be there otherwise the script will not work. This is because they are present in the `Interactable` function this script overrides and could be used in other interactioms in the future. They are called when you hover over or look away from the item.
+> The `OnFocus` and `OnLoseFocus` functions can be ignored because we don't need to do anything in those for this interaction but they have to be there otherwise the script will not work. This is because they are present in the `Interactable` function this script overrides; The reason I haven't deleted them is because they could be useful for other interactions in the game. They are called when you hover over or look away from the item.
 ```cs
 public class ItemInteract : Interactable
 {
@@ -205,7 +211,7 @@ Now you can create a prefab for the object in the world. First spawn in a `3D Cu
 
 ![image](https://github.com/user-attachments/assets/98572c43-45c9-4895-a84d-0c47281730dc)
 
-Now you should be able to walk up to this object, and interact with it. Although at the moment it won't destroy because the `player inventory` script does not exist. You can add a `Debug.Log` in the `PickUp` function to check if your interaction is working.
+Now you should be able to walk up to this object, and interact with it. Although at the moment it won't destroy because the `player inventory` script does not exist. You can add a `Debug.Log` in the `OnInteract` function and comment out the `Pickup` function to check if your interaction is working.
 
 ## Inventory Functionality
 > In the section we will be creating the functional part of the system. We will be writing the code to `add`, `remove`, `swap` items and more. 
