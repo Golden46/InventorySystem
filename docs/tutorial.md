@@ -20,11 +20,11 @@ Additionally, you will need basic understanding of a few intermediate programmin
 
 
 ## Information & Objectives
-This tutorial is quite long, if you somehow miss where you were at, you can press the 3 lines in the top right to open the Outline to jump to specific points. Before you start the tutorial, if you would like more information about each script, function, varable etc... you can click on the script name highlighted in blue and it will take you to a seperate page where you can explore the proper documentation.
+This tutorial is quite long, if you somehow miss where you were at, you can press the 3 lines in the top right to open the Outline to jump to specific points.
 
 
 ## Setting up the scene
-First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Rednder pipeline but it can be created the same using the Built-In Render Pipeline too. If you have downloaded my `First Person Controller` then you should already have a player you can move around. If not you will need your own.
+First, you will need to create a Unity 3D project. This was created using the Universal 3D template with the Universal Render pipeline but it can be created the same using the Built-In Render Pipeline too. If you have downloaded my `First Person Controller` then you should already have a player you can move around. If not you will need your own.
 
 Set up your project hierarchy as follows.
 ```
@@ -59,6 +59,7 @@ To start off, we will create the `base class` for every item in our game. This c
 > [!NOTE]
 > This `Scriptable Object` will never be created as an asset we can use. All of our `item types` will have seperate scripts that all `inherit` from this `class`. The `abstract function` at the bottom of the script will be overriden later on in our item classes order to get the item stats from each seperate item so it can be displayed in our inventory.
 
+
 ```cs
 using UnityEngine;
 using System.Collections.Generic;
@@ -81,7 +82,7 @@ public abstract class InventoryItem : ScriptableObject
 ```
 
 > [!TIP]
-> So you can easily view the data in the inspector, you should add `headers` to your properties. In this script I have added a header for the `item info` and `stack info` to help organise it.
+> So you can easily view the data in the inspector, you should group your properties with `headers`. In this script I have added a header for the `item info` and `stack info`.
 
 ***
 
