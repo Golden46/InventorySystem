@@ -228,11 +228,12 @@ public void OnPointerExit(PointerEventData eventData)
  ***
 
 ### Creating the Inventory UI.
-First, create a new `Canvas` and call it `InventoryCanvas` then add the `InventoryUI` script to it. Now create a `Panel`, call it `ItemHolder`, and size it to how you want your inventory to look. Add the `Grid Layout Group` component to the `ItemHolder` and set the `Cell Size` to however big you want your slots to be - mine is `100x100`. You should also edit the `Spacing` and `Padding` until you get something you are happy with. To test how it looks create a `Button` under the `ItemHolder` and remove the `TextMeshProUGUI` component. Also, create a new `TextMeshProUGUI` component and set the text to `Inventory` and position it at the top of the `Panel`; Make this a child of `InventoryCanvas` not `ItemHolder`. 
+- First, create a new `Canvas` and call it `InventoryCanvas` then add the `InventoryUI` script to it. 
+- Now create a `Panel` in the `Canvas`, call it `ItemHolder`, and size and colour it to how you want your inventory to look. Add the `Grid Layout Group` component to the `ItemHolder` and set the `Cell Size` to however big you want your slots to be - mine is `100x100`. You should also edit the `Spacing` and `Padding` until you get something you are happy with.
 
+- Create a new `TextMeshProUGUI` component and set the text to `Inventory` and position it at the top of the `Panel`; Make this a child of `InventoryCanvas` not `ItemHolder`.
 ![image](https://github.com/user-attachments/assets/22f1520e-e761-4cd5-8c34-f4bcec4d0eeb)
 
-Now with that `Button` you created, name it to `Slot` and add the `InventorySlot` script to it. You also want to create an `Image` as a child and call it `Icon` - additionally, add the `Canvas Group` component to it. Then drag the `Icon GameObject` into the `Icon` slot on the `InventorySlot` script in the inspector. 
+- Now, create a `Button` under the `ItemHolder` and call it `Slot` then delete the `TextMeshProUGUI` component. Add the `InventorySlot` script to it and create an `Image` as a child and call it `Icon` - additionally, add the `Canvas Group` component to it. Make sure `Block Raycasts` and `Interactable` is ticked. Then drag the `Icon` `GameObject` into the `Icon` slot on the `InventorySlot` script in the inspector. 
 
-TALK ABOUT STAT PANEL NEXT
-
+- Now we are going to make the `Stat Panel`.
