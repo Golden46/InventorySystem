@@ -234,6 +234,23 @@ public void OnPointerExit(PointerEventData eventData)
 - Create a new `TextMeshProUGUI` component and set the text to `Inventory` and position it at the top of the `Panel`; Make this a child of `InventoryCanvas` not `ItemHolder`.
 ![image](https://github.com/user-attachments/assets/22f1520e-e761-4cd5-8c34-f4bcec4d0eeb)
 
-- Now, create a `Button` under the `ItemHolder` and call it `Slot` then delete the `TextMeshProUGUI` component. Add the `InventorySlot` script to it and create an `Image` as a child and call it `Icon` - additionally, add the `Canvas Group` component to it. Make sure `Block Raycasts` and `Interactable` is ticked. Then drag the `Icon` `GameObject` into the `Icon` slot on the `InventorySlot` script in the inspector. 
+- Now, create a `Button` under the `ItemHolder` and call it `Slot` then delete the `TextMeshProUGUI` component. Add the `InventorySlot` script to it and create an `Image` as a child and call it `Icon` - additionally, add the `Canvas Group` component to it. Make sure `Block Raycasts` and `Interactable` is ticked. Then drag the `Icon` `GameObject` into the `Icon` slot on the `InventorySlot` script in the inspector. If I duplicate the slot a few times it should look something like this automatically.
+![image](https://github.com/user-attachments/assets/1fd46871-4f68-463a-9e4f-8e8bdc335250)
 
-- Now we are going to make the `Stat Panel`.
+
+- Now we are going to make the `Stat Panel`. First create a new `Panel` object under `Slot` and name it `StatPanel`. Reduce the alpha a little and set the colour to whatever you want; I set mine to black. Add a `TextMeshProUGUI` component as a child of this and size the panel as you see below. Name it `ItemName` and it doesn't matter what text you put in this component as it is changed during runtime.
+![image](https://github.com/user-attachments/assets/5a0a908a-cba2-4eae-b8eb-2bf892f085ba)
+
+- On the `StatPanel`, set the `Anchor Preset` to `Top Center` and change the pivot to `X 0.5, Y 1`. This is so that when the stats get added, they appear below the name and keep going down. Add the elements as shown in the below screenshot. The `Horizontal Layout Group` is so when the stats are added they are added horizontally going down. The `Content Size Fitter` is so the panel adjusts if the text wraps over the side. The `Layout Element` is so it ignores the `Slot` `Vertical Layout Group` otherwise it would conform to that and act really weird.
+- ![image](https://github.com/user-attachments/assets/ae6d53bb-30d0-49bd-82e7-38d12ac9cd9b)
+
+- Now create another `TextMeshProUGUI` component and name it `Stats`. Remove all text from it and again set the `Pivot` to `X 0.5, Y1`. Add the components as shown below. The `Content Size Fitter` is so it doesn't wrap around and instead will expand the panel out.
+![image](https://github.com/user-attachments/assets/5c852133-dbc8-43cd-a724-a453c49d8a5a)
+
+- Finally set up the `Inventory Slot` script on the `Slot` object as follows and make the `Slot` object a prefab. You should now go to the `InventoryCanvas` and on the `Inventory UI` script drag the slot prefab into the correct section.
+![image](https://github.com/user-attachments/assets/2358b8af-0435-4634-b1b7-56eab8d306d5)
+
+You should now have working inventory UI!
+
+![image](https://github.com/user-attachments/assets/5b4b469d-44a1-42ac-b125-17ddf3250c69)
+
