@@ -1,5 +1,5 @@
 # Inventory System Learning Journal
-This log is a record of my progress with the inventory system and any issues I encounterd
+This log is a record of my progress with the inventory system and any issues I encounterd. This includes the first tutorial and the second UI tutorial.
 
 
 ## 2024-10-10
